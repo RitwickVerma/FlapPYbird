@@ -29,6 +29,15 @@ config = {
         'acceleration_y':3
     },
 
+    'background': {
+        'cloud_intensity':10,
+        'max_cloud': {
+            'width':300,
+            'height':150,
+            'velocity_x':-6
+        }
+    },
+
     'color': {
         'ball': (255,99,71),
         'floor': (222, 216, 149),

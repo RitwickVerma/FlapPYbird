@@ -1,8 +1,9 @@
 import pygame
 import math
-from src.config import config,control
+from src.config import config, control
 from src.bird import Bird
 from src.ball import Ball
+from src.background import Background
 
 class Game:
     def __init__(self, display):
@@ -22,6 +23,7 @@ class Game:
 
         bird=Bird(self.display)
         ball=Ball(self.display)
+        background=Background(self.display)
 
         clock = pygame.time.Clock()
         
@@ -56,13 +58,9 @@ class Game:
                 
                 bird.vx, ball.vx=ball.vx, bird.vx
                 bird.vy, ball.vy=ball.vy, bird.vy                
+            
 
-            
-            self.display.fill(config['color']['sky'])
-            
-            pygame.draw.rect(self.display,config['color']['floor'],(0,self.floor,self.w,self.h-self.floor))
-
-            
+            background.draw()    
             bird.draw()
             ball.draw()
 
