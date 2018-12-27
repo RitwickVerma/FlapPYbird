@@ -31,16 +31,28 @@ config = {
 
     'background': {
         'cloud_intensity':10,
+        'cloud_frequency':200,
+        'bush_intensity':50,
+        'bush_frequency':1,
+        'cloud_height':150,
         'max_cloud': {
             'width':300,
             'height':150,
             'velocity_x':-6
+        },
+        'max_grass':{
+            'width':10,
+            'height':10
+        },
+        'max_bush':{
+            'width':80,
+            'height':60
         }
     },
 
     'color': {
         'ball': (255,99,71),
-        'floor': (222, 216, 149),
+        'floor': (60,179,113),
         'sky': (112,197,206),
     }
 }

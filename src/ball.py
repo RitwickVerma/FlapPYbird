@@ -1,48 +1,49 @@
 import pygame
-import pygame.gfxdraw
 from src.config import config
 
 class Ball(pygame.sprite.Sprite):
     def __init__(self,display):
         pygame.sprite.Sprite.__init__(self)
-        self.px=config['ball']['start_pos_x']
-        self.py=config['ball']['start_pos_y']
+
+        self.display=display
+
+        self.game_width=config['game']['width']
+        self.game_floor=config['game']['floor']
+        self.game_height=config['game']['height']
+        
         self.r=config['ball']['radius']
         self.vx=config['ball']['velocity_x']
         self.vy=config['ball']['velocity_y']
         self.ax=config['ball']['acceleration_x']
         self.ay=config['ball']['acceleration_y']
-        self.mtop=0
-        self.mbot=config['game']['floor']-2*self.r
-        self.mlef=0
-        self.mrig=config['game']['width']-2*self.r
-        self.display=display
+
         self.rotvar=0
 
-        self.image=pygame.transform.scale(pygame.image.load('src/football.png').convert_alpha(),(2*self.r,2*self.r))
+        self.image=pygame.transform.scale(pygame.image.load('src/img_res/football.png').convert_alpha(),(2*self.r,2*self.r))
         self.mask=pygame.mask.from_surface(self.image)
         
-        self.rect=pygame.Rect(self.px,self.py,2*self.r, 2*self.r)
+        self.rect=pygame.Rect(self.image.get_rect())
+        self.rect.x=config['ball']['start_pos_x']
+        self.rect.y=config['ball']['start_pos_y']
+
     
     def draw(self):
         self.physiks()
-        self.rect=pygame.Rect(self.px,self.py,2*self.r, 2*self.r)
-        #self.image=pygame.transform.rotate(self.image,5)
         self.display.blit(self.rot_center(self.image, self.rotvar),self.rect)   
         self.rotvar-=self.vx*0.5
         
 
     def physiks(self):   
-        self.px+=self.vx
+        self.rect.x+=self.vx
         self.vx+=self.ax
 
-        self.py+=self.vy
+        self.rect.y+=self.vy
         self.vy+=self.ay
 
-        if(self.px>=self.mrig or self.px<=self.mlef):
+        if(self.rect.right>=self.game_width or self.rect.left<=0):
             self.vx=-self.vx+self.ax
 
-        if(self.py>=self.mbot or self.py<=self.mtop):
+        if(self.rect.bottom>=self.game_floor or self.rect.top<=0):
             self.vy=-self.vy+self.ay
 
 

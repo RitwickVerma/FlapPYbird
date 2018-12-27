@@ -1,4 +1,4 @@
-# FlaPYball [UNDER CONSTRUCTION]
+# FlapPYball [UNDER CONSTRUCTION]
 
 ![This is supposed to be the alternative text](/screenshot/screenshot.png)
 
@@ -12,7 +12,7 @@ For reference on key mappings, click [here](https://www.pygame.org/docs/ref/key.
 
 To play, run
 ~~~
-python PATH_TO_FlaPYball/FlapPYball.py
+python PATH_TO_FlapPYball/FlapPYball.py
 ~~~
 
 A few things to remember:

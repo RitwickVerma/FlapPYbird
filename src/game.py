@@ -6,11 +6,17 @@ from src.ball import Ball
 from src.background import Background
 
 class Game:
+
+    game_width=config['game']['width']
+    game_floor=config['game']['floor']
+    game_height=config['game']['height']
+
     def __init__(self, display):
         self.display = display
-        self.w=config['game']['width']
-        self.h=config['game']['height']
-        self.floor=config['game']['floor']
+        
+        self.game_width=config['game']['width']
+        self.game_floor=config['game']['floor']
+        self.game_height=config['game']['height']
 
         self.k_up=control['bird']['up']
         self.k_left=control['bird']['left']
@@ -53,8 +59,11 @@ class Game:
                 bird.move_right()
 
             if(pygame.sprite.collide_mask(bird,ball) is not None):     
-                bird.px=bird.px-bird.vx+bird.ax
-                bird.py=bird.py-bird.vy+bird.ay
+                bird.rect.x-=bird.vx+bird.ax
+                bird.rect.y-=bird.vy+bird.ay
+
+                ball.rect.x-=ball.vx+ball.ax
+                ball.rect.y-=ball.vy+ball.ay
                 
                 bird.vx, ball.vx=ball.vx, bird.vx
                 bird.vy, ball.vy=ball.vy, bird.vy                
