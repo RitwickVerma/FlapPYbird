@@ -6,6 +6,7 @@ from src.config import config
 def main():
     display=pygame.display.set_mode((config['game']['width'],config['game']['height']))
     pygame.display.set_caption(config['game']['caption'])
+    pygame.font.init()
     flappyball=Game(display)
     flappyball.loop()
  

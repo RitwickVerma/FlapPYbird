@@ -1,5 +1,14 @@
 import pygame
 
+color={
+    'red': (255,99,71),
+    'green': (60,179,113),
+    'blue': (112,197,206),
+    'yellow':(222, 216, 149),
+    'white':(255,255,255),
+    'black':(0,0,0)
+}
+
 config = {
     'game': {
         'caption': 'FlapPYball',
@@ -51,9 +60,9 @@ config = {
     },
 
     'color': {
-        'ball': (255,99,71),
-        'floor': (60,179,113),
-        'sky': (112,197,206),
+        'sky': color['blue'],
+        'floor': color['green'],
+        'font': color['white']
     }
 }
 
@@ -69,3 +78,4 @@ control={
         'fullscreen':pygame.K_f
     }
 }
+

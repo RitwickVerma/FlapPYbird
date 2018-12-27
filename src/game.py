@@ -13,7 +13,7 @@ class Game:
 
     def __init__(self, display):
         self.display = display
-        
+
         self.game_width=config['game']['width']
         self.game_floor=config['game']['floor']
         self.game_height=config['game']['height']
@@ -80,8 +80,13 @@ class Game:
 
     def pause(self):
         paused=True
-        #pygame.draw.rect(self.display,config['color']['floor'],(700,200,150,200))
-        #pygame.display.update()
+        #pygame.draw.rect(self.display,)
+        text=pygame.font.SysFont('cabinsketch',200).render('PAUSED',True,config['color']['font'])
+        rect=text.get_rect()
+        rect.center=(self.game_width/2,self.game_floor/2)
+        self.display.blit(text,rect)
+
+        pygame.display.update()
         while paused:
             events=pygame.event.get()            
             for event in events:
