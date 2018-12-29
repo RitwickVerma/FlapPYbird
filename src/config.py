@@ -19,7 +19,7 @@ config = {
     },
     'bird': {
         'start_pos_x':500,
-        'start_pos_y':300,
+        'start_pos_y':200,
         'width': 60,
         'height': 42,
         'velocity_x':30,
@@ -41,9 +41,10 @@ config = {
     'background': {
         'cloud_intensity':10,
         'cloud_frequency':200,
-        'bush_intensity':50,
+        'bush_intensity':2,
         'bush_frequency':1,
         'cloud_height':150,
+        'tree_offset':20,
         'max_cloud': {
             'width':300,
             'height':150,
@@ -56,6 +57,10 @@ config = {
         'max_bush':{
             'width':80,
             'height':60
+        },
+        'tree':{
+            'width':300,
+            'height':450
         }
     },
 

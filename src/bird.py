@@ -31,19 +31,29 @@ class Bird(pygame.sprite.Sprite):
         self.display.blit(pygame.transform.rotozoom(self.image, self.vy*(1 if self.bird_flipped else -1),1),self.rect)        
 
     def physiks(self):   
-        self.rect.x+=self.vx
-        self.vx+=self.ax
+        
         self.vx=self.vx*0.8
-
-        self.rect.y+=self.vy
+        self.vx+=self.ax
+        self.rect.x+=self.vx
+        
+        
         self.vy+=self.ay
-        self.vy=self.vy
+        self.rect.y+=self.vy
 
-        if(self.rect.right>=self.game_width or self.rect.left<=0):
-            self.vx=-self.vx+self.ax
+        if(self.rect.right>self.game_width or self.rect.left<0):
+            self.vx=-self.vx
+            
 
-        if(self.rect.bottom>=self.game_floor or self.rect.top<=0):
-            self.vy=-self.vy+self.ay
+        if((self.rect.bottom>self.game_floor or self.rect.top<0)):
+            self.vy=-self.vy
+            
+        self.rect.left = self.clip(self.rect.left, 0, self.game_width)
+        self.rect.right = self.clip(self.rect.right, 0, self.game_width)        
+        self.rect.top = self.clip(self.rect.top, 0, self.game_floor)
+        self.rect.bottom = self.clip(self.rect.bottom, 0, self.game_floor)                
+
+    def clip(self,val, minval, maxval):
+        return min(max(val, minval), maxval)
 
             
     

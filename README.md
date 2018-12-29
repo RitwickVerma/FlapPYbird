@@ -12,7 +12,7 @@ For reference on key mappings, click [here](https://www.pygame.org/docs/ref/key.
 
 To play, run
 ~~~
-python PATH_TO_FlapPYball/FlapPYball.py
+python FlapPYball.py
 ~~~
 
 A few things to remember:

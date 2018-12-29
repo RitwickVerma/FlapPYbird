@@ -5,12 +5,12 @@ from src.config import config
 
 class Background():
 
-    def __init__(self,display):
-        self.display=display
+    game_width=config['game']['width']
+    game_floor=config['game']['floor']
+    game_height=config['game']['height']
 
-        self.game_width=config['game']['width']
-        self.game_floor=config['game']['floor']
-        self.game_height=config['game']['height']
+    def __init__(self,display):
+        self.display=display  
     
         self.cloud_intensity=config['background']['cloud_intensity']
         self.cloud_frequency=config['background']['cloud_frequency']
@@ -25,6 +25,9 @@ class Background():
 
         self.bushes=[]
         #self.generate_bushes()
+
+        self.trees=[]
+        self.generate_trees()
 
     def draw(self):
         self.display.fill(config['color']['sky'])
@@ -41,6 +44,8 @@ class Background():
         for bush in self.bushes:
             bush.draw()
         
+        for tree in self.trees:
+            tree.draw()
     
     
     def generate_clouds(self):  
@@ -56,10 +61,22 @@ class Background():
             self.grass.append(grass)
 
     def generate_bushes(self):    
-        for i in range(-10,300,50):
+        for i in range(self.bush_intensity):
             bush=Bush(self.display)
             bush.rect.left=i
             self.bushes.append(bush)
+        
+    def generate_trees(self):
+        tree1=Tree(self.display)
+        tree1.rect.left=config['background']['tree_offset']
+        tree1.image=pygame.transform.flip(tree1.image,True,False)
+        self.trees.append(tree1)
+
+        tree2=Tree(self.display)
+        tree2.rect.right=self.game_width-config['background']['tree_offset']
+
+        self.trees.append(tree2)
+        
 
 
 class Cloud(Background):    
@@ -96,7 +113,7 @@ class Grass(Background):
 
         self.image=pygame.transform.scale(pygame.image.load('src/img_res/grass.png').convert_alpha(),(int(self.w),int(self.h)))
         self.rect=pygame.Rect(self.image.get_rect())
-        self.rect.bottom=800
+        self.rect.bottom=Background.game_floor
 
     def draw(self):
         self.display.blit(self.image,self.rect)
@@ -105,7 +122,7 @@ class Bush(Background):
     def __init__(self,display):
         self.display=display
 
-        self.sizefactor=random.randint(50,100)/100
+        self.sizefactor=1#random.randint(50,100)/100
 
         self.w=int(config['background']['max_bush']['width']*self.sizefactor)
         self.h=int(config['background']['max_bush']['height']*self.sizefactor)
@@ -113,7 +130,22 @@ class Bush(Background):
         self.image=pygame.transform.scale(pygame.image.load('src/img_res/bush.png').convert_alpha(),(int(self.w),int(self.h)))
         self.rect=pygame.Rect(self.image.get_rect())
         
-        self.rect.bottom=810
+        self.rect.bottom=self.game_floor+10
+
+    def draw(self):
+        self.display.blit(self.image,self.rect)
+
+class Tree(Background):
+    def __init__(self,display):
+        self.display=display
+
+        self.w=config['background']['tree']['width']
+        self.h=config['background']['tree']['height']
+
+        self.image=pygame.transform.scale(pygame.image.load('src/img_res/tree.png').convert_alpha(),(int(self.w),int(self.h)))
+        self.rect=pygame.Rect(self.image.get_rect())
+        
+        self.rect.bottom=self.game_floor+10
 
     def draw(self):
         self.display.blit(self.image,self.rect)

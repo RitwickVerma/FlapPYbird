@@ -75,7 +75,6 @@ class Game:
 
             pygame.display.update()
 
-
             clock.tick(config['game']['fps'])
 
     def pause(self):
