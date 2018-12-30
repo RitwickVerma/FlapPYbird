@@ -29,6 +29,7 @@ class Background():
         self.trees=[]
         self.generate_trees()
 
+
     def draw(self):
         self.display.fill(config['color']['sky'])
         pygame.draw.rect(self.display,config['color']['floor'],(0,self.game_floor,self.game_width,self.game_height-self.game_floor))
@@ -69,13 +70,24 @@ class Background():
     def generate_trees(self):
         tree1=Tree(self.display)
         tree1.rect.left=config['background']['tree_offset']
-        tree1.image=pygame.transform.flip(tree1.image,True,False)
+        #tree1.image=pygame.transform.flip(tree1.image,True,False)
         self.trees.append(tree1)
 
         tree2=Tree(self.display)
         tree2.rect.right=self.game_width-config['background']['tree_offset']
-
+        tree2.image=pygame.transform.flip(tree2.image,True,False)
         self.trees.append(tree2)
+
+    def generate_goals(self):
+        goal1=Goal(self.display)
+        goal1.rect.left=0
+        #tree1.image=pygame.transform.flip(tree1.image,True,False)
+        self.goals.append(goal1)
+
+        goal2=Goal(self.display)
+        goal2.rect.right=self.game_width
+        goal2.image=pygame.transform.flip(goal2.image,True,False)
+        self.goals.append(goal2)
         
 
 
@@ -145,7 +157,7 @@ class Tree(Background):
         self.image=pygame.transform.scale(pygame.image.load('src/img_res/tree.png').convert_alpha(),(int(self.w),int(self.h)))
         self.rect=pygame.Rect(self.image.get_rect())
         
-        self.rect.bottom=self.game_floor+10
+        self.rect.bottom=self.game_floor+15
 
     def draw(self):
         self.display.blit(self.image,self.rect)

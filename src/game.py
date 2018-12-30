@@ -4,6 +4,7 @@ from src.config import config, control
 from src.bird import Bird
 from src.ball import Ball
 from src.background import Background
+from src.goal import Goal
 
 class Game:
 
@@ -30,6 +31,8 @@ class Game:
         bird=Bird(self.display)
         ball=Ball(self.display)
         background=Background(self.display)
+        goalp1=Goal(self.display,1)
+        goalp2=Goal(self.display,2)
 
         clock = pygame.time.Clock()
         
@@ -68,10 +71,15 @@ class Game:
                 bird.vx, ball.vx=ball.vx, bird.vx
                 bird.vy, ball.vy=ball.vy, bird.vy                
             
+            
 
-            background.draw()    
+            background.draw()
+            goalp1.draw_back() 
+            goalp2.draw_back()   
             bird.draw()
             ball.draw()
+            goalp1.draw_front()
+            goalp2.draw_front()
 
             pygame.display.update()
 

@@ -37,6 +37,11 @@ config = {
         'acceleration_x':0,
         'acceleration_y':3
     },
+    'goal': {
+        'width':100,
+        'height':130,
+        'from_top':100
+    },
 
     'background': {
         'cloud_intensity':10,
