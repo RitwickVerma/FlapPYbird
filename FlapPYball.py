@@ -8,7 +8,7 @@ def main():
     pygame.display.set_caption(config['game']['caption'])
     pygame.font.init()
     flappyball=Game(display)
-    flappyball.loop()
+    flappyball.game_loop()
  
 if __name__ == "__main__":
     main()

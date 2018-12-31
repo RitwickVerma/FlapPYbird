@@ -18,8 +18,10 @@ config = {
         'fps': 45,
     },
     'bird': {
-        'start_pos_x':500,
-        'start_pos_y':200,
+        'p1_start_pos_x':300,
+        'p1_start_pos_y':200,
+        'p2_start_pos_x':1300,
+        'p2_start_pos_y':200,
         'width': 60,
         'height': 42,
         'velocity_x':30,
@@ -77,7 +79,12 @@ config = {
 }
 
 control={
-    'bird':{
+    'p1_bird':{
+        'up':pygame.K_w,
+        'left':pygame.K_a,
+        'right':pygame.K_d
+    },
+    'p2_bird':{
         'up':pygame.K_UP,
         'left':pygame.K_LEFT,
         'right':pygame.K_RIGHT

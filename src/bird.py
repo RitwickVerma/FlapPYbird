@@ -2,7 +2,7 @@ import pygame
 from src.config import config
 
 class Bird(pygame.sprite.Sprite):
-    def __init__(self,display):
+    def __init__(self,display,player):
         pygame.sprite.Sprite.__init__(self)
 
         self.display=display
@@ -11,20 +11,25 @@ class Bird(pygame.sprite.Sprite):
         self.game_floor=config['game']['floor']
         self.game_height=config['game']['height']
 
-        self.vx=config['bird']['velocity_x']
+        self.vx=config['bird']['velocity_x']*(1 if (player==1) else -1)
         self.vy=config['bird']['velocity_y']
         self.ax=config['bird']['acceleration_x']
         self.ay=config['bird']['acceleration_y']
         self.vjy=config['bird']['velocity_jump_y']
         
-        self.image=pygame.transform.scale(pygame.image.load('src/img_res/flappy.png').convert_alpha(),(config['bird']['width'],config['bird']['height']))
+        self.image=pygame.transform.scale(pygame.image.load('src/img_res/p'+str(player)+'_flappy.png').convert_alpha(),(config['bird']['width'],config['bird']['height']))
         self.mask=pygame.mask.from_surface(self.image)
         self.rect=pygame.Rect(self.image.get_rect())
 
-        self.rect.x=config['bird']['start_pos_x']
-        self.rect.y=config['bird']['start_pos_y']
+        if(player==1):
+            self.rect.x=config['bird']['p1_start_pos_x']
+            self.rect.y=config['bird']['p1_start_pos_y']
+            self.bird_flipped=False
+        else:
+            self.rect.x=config['bird']['p2_start_pos_x']
+            self.rect.y=config['bird']['p2_start_pos_y']
+            self.bird_flipped=True
         
-        self.bird_flipped=False
     
     def draw(self):
         self.physiks()        
