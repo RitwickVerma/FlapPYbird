@@ -30,6 +30,7 @@ class Game:
         self.k_quit=control['game']['quit']
         self.k_fullscreen=control['game']['fullscreen']
 
+        self.running=True
         self.p1_bird=Bird(self.display,1)
         self.p2_bird=Bird(self.display,2)
         self.ball=Ball(self.display)
@@ -39,15 +40,13 @@ class Game:
         self.p1_score=0
         self.p2_score=0
         self.last_touch=0
+        self.goal_bool=False
         
     def game_loop(self):
-
-        
-
         clock = pygame.time.Clock()
         
-        running=True
-        while running:
+        self.running=True
+        while self.running:
 
             events=pygame.event.get()            
             for event in events:
@@ -144,7 +143,19 @@ class Game:
 
 
     def check_goal(self):
-        if(self.ball.rect.centerx<self.p1_goal.rect.right and self.ball.rect.centerx>self.p1_goal.rect.right-50 and self.ball.rect.top>self.p1_goal.rect.top and self.ball.rect.bottom<self.p1_goal.rect.bottom and self.ball.vx!=0):
+        
+        if(self.p1_score>=5):
+            self.write('Player 1 Wins',200,self.game_width/2,self.game_height/2)
+            pygame.display.update()
+            pygame.time.delay(2000)
+            self.running=False
+        if(self.p2_score>=5):
+            self.write('Player 2 Wins',200,self.game_width/2,self.game_height/2)
+            pygame.display.update()
+            pygame.time.delay(2000)
+            self.running=False
+
+        if(self.ball.rect.centerx<self.p1_goal.rect.right and self.ball.rect.centerx>self.p1_goal.rect.right-50 and self.ball.rect.top>self.p1_goal.rect.top and self.ball.rect.bottom<self.p1_goal.rect.bottom and self.ball.vx<0 and not self.goal_bool):
             self.p1_score+=1
             if(self.last_touch==2):
                 self.write('GOOOAL!!',200,self.game_width/2,self.game_height/2)
@@ -152,18 +163,22 @@ class Game:
                 self.write('OWN GOAL!',150,self.game_width/2,self.game_height/2)
             pygame.display.update()
             pygame.time.delay(1000)
+            self.goal_bool=True
 
         
-        if(self.ball.rect.centerx>self.p2_goal.rect.left and self.ball.rect.centerx<self.p2_goal.rect.left+50 and self.ball.rect.top>self.p2_goal.rect.top and self.ball.rect.bottom<self.p2_goal.rect.bottom and self.ball.vx!=0):
+        elif(self.ball.rect.centerx>self.p2_goal.rect.left and self.ball.rect.centerx<self.p2_goal.rect.left+50 and self.ball.rect.top>self.p2_goal.rect.top and self.ball.rect.bottom<self.p2_goal.rect.bottom and self.ball.vx>0 and not self.goal_bool):
             self.p2_score+=1
             if(self.last_touch==1):
                 self.write('GOOOAL!!',200,self.game_width/2,self.game_height/2)
             else:
                 self.write('OWN GOAL!',150,self.game_width/2,self.game_height/2)
-        
             pygame.display.update()
-
             pygame.time.delay(1000)
+            self.goal_bool=True
+
+        else:
+            self.goal_bool=False
+
 
     def write(self,text,size,x,y,color=config['color']['font']):
         text=pygame.font.SysFont('cabinsketch',size).render(text,True,color)
