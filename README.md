@@ -26,4 +26,4 @@ python FlapPYball.py
 * Kindly play with the physics.
 * Score increases only when the ball completely hits the goal
 * The goals are holographic and ~~placeholder slang for extreta~~
-* ~~Getting font 'cabin sketch' is highly recommended otherwise pygame defaults to some lame generic font which isn't even dope.~~ (Font is not included with the game)
+* ~~Getting font 'cabin sketch' is highly recommended otherwise pygame defaults to some lame generic font which isn't even dope.~~ (Font is now included with the game. No need to install system-wide)
