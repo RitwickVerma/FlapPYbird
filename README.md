@@ -15,11 +15,15 @@ To play, run
 python FlapPYball.py
 ~~~
 
-A few things to know:
+#### Prerequisites
+* pygame
+
+
+#### A few things to know:
 * All collisions are elastic.
 * Mass of the ball and bird are equal, so velocities exchange.
 * This game is pretty buggy as of now.
 * Kindly play with the physics.
 * Score increases only when the ball completely hits the goal
 * The goals are holographic and ~~placeholder slang for extreta~~
-* Getting font 'cabin sketch' is highly recommended otherwise pygame defaults to some lame generic font which isn't even dope.
+* ~~Getting font 'cabin sketch' is highly recommended otherwise pygame defaults to some lame generic font which isn't even dope.~~ (Font is not included with the game)

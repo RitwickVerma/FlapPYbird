@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pygame
 from src.game import Game
 from src.config import config

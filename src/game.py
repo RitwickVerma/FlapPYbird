@@ -181,7 +181,7 @@ class Game:
 
 
     def write(self,text,size,x,y,color=config['color']['font']):
-        text=pygame.font.SysFont('cabinsketch',size).render(text,True,color)
+        text=pygame.font.Font('src/font/cabin-sketch.regular.ttf',size).render(text,True,color)
         rect=text.get_rect()
         rect.center=(x,y)
         self.display.blit(text,rect)
